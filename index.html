@@ -42,12 +42,12 @@
                         <div class="_preview-user">
 
                             <div class="_preview-photo">
-                                <img src="img/avatar_1.jpg" alt="">
+                                <img src="img/avatar_7.jpg" alt="">
                             </div>
 
 
                             <div class="_text-container">
-                                <span class="_user-name">Nome Cognome</span>
+                                <span class="_user-name">Danesh Shahpouri</span>
                             </div>
 
                         </div>
@@ -91,14 +91,14 @@
                     <!-- chat List -->
                     <div class="_chat-list">
 
-                        <div class="_card">
+                        <div v-for="(element,index) in contacts" class="_card" @click="selectContact(index)">
                             <div class="_preview-photo">
-                                <img src="img/avatar_2.jpg" alt="">
+                                <img :src="contacts[index].avatar">
                             </div>
 
                             <div class="_text-container">
-                                <span class="_user-name">Nome Cognome</span>
-                                <span class="_info-date">Ultimo accesso:</span>
+                                <span class="_user-name">{{contacts[index].name}}</span>
+                                <span class="_info-date">Ultimo accesso {{contacts[index].messages[contacts[index].messages.length-1].date}}</span>
                             </div>
 
                             <span class="_date-message">12:30</span>
@@ -116,13 +116,13 @@
 
                         <div class="_preview-contact">
                             <div class="_preview-photo">
-                                <img src="img/avatar_1.jpg" alt="">
+                                <img :src="contacts[globalIndex].avatar" :alt="contacts[globalIndex].name">
                             </div>
 
 
                             <div class="_text-container">
-                                <span class="_user-name">Nome Cognome</span>
-                                <span class="_info-date">Ultimo accesso:</span>
+                                <span class="_user-name">{{contacts[globalIndex].name}}</span>
+                                <span class="_info-date">Ultimo accesso {{contacts[globalIndex].messages[contacts[globalIndex].messages.length-1].date}}</span>
                             </div>
                         </div>
 
@@ -141,15 +141,9 @@
                     <!-- Mainscreen -->
                     <div class="_chat-screen">
 
-                        <div class="server-mess">
-                            Ciao sono il pc
+                        <div v-for="(element, index) in contacts[globalIndex].messages" :class="contacts[globalIndex].messages[index].status == 'sent' ? 'server-mess' : 'user-mess'">
+                            {{contacts[globalIndex].messages[index].message}}
                             <span class="_time-mess">12:29</span>
-                        </div>
-
-
-                        <div class="user-mess">
-                            Ciao sono l'user
-                            <span class="_time-mess">12:30</span>
                         </div>
 
                     </div>
