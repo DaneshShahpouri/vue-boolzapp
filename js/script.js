@@ -1,3 +1,4 @@
+var DateTime = luxon.DateTime;
 const { createApp } = Vue
 
   createApp({
@@ -168,13 +169,43 @@ const { createApp } = Vue
         ],
 
         globalIndex: 0,
+
+        newMessageText: '',
         
+        newMessage:{
+            date: '10/01/2020 15:30:55',
+            message: '',
+            status: 'send'
+        },
       }
     },
 
     methods:{
         selectContact(Elindex){
             this.globalIndex = Elindex;
-        }
+        },
+
+        addMessage(){
+            
+            let date = DateTime.now().setZone('Europe/Rome');
+            this.newMessage.date = `${date.day}/${date.month}/${date.year} ${date.hour}:${date.minute}:${date.second}`;
+            this.newMessage.message = this.newMessageText;
+            console.log(this.newMessage);
+            console.log(this.contacts[this.globalIndex]);
+
+            if(this.newMessageText != ''){
+                this.contacts[this.globalIndex].messages.push(this.newMessage)
+            }
+            
+            this.newMessageText = ''
+            this.newMessage = {}
+            // console.log(date.day);
+            // console.log(date.month);
+            // console.log(date.year);
+            // console.log(date.hour);
+            // console.log(date.minute);
+            
+;
+        },
     }
   }).mount('#app')
