@@ -1,7 +1,250 @@
+*{
+    font-family: 'Questrial', sans-serif;
+}
+
+.center{
+    max-width: 1200px;
+    margin-left: auto; 
+    margin-right: auto; 
+}
 
 /* Commons */
 
-.all-container{
+._all-container{
     width:100%; height: 100vh;
     overflow-y: hidden;
+
+    position: relative;
+
+    background: rgb(217, 219, 212);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+._all-container ._background-bar{
+    width: 100%; height: 210px;
+
+    position: absolute;
+    top: 0; left: 0;
+
+    background: rgb(0, 150, 136);
+    z-index: 0;
+}
+
+/* ScreenApp */
+._app-container{
+    height: 90%; width: 100%;
+    position: relative;
+
+    z-index: 1;
+}
+
+._app-container ._left-side{
+    display: flex;
+    flex-direction:column;
+
+    width: 40%; height: 100%;
+
+    border-right: 1px solid rgb(172, 172, 172);
+
+     /* debug */
+     background: rgba(115, 246, 255, 0.726);
+}
+
+._app-container ._rigth-side{
+    display: flex;
+    flex-direction:column;
+    
+    width: 60%; height: 100%;
+
+    /* debug */
+    background: rgba(255, 115, 115, 0.726);
+}
+
+/* Top-Bar */
+._top-bar{
+    width:100%; height: 60px;
+
+    display: flex;
+    justify-content: space-between;
+
+    padding: .5em;
+
+    background: rgb(234, 234, 234)
+}
+
+
+._top-bar ._preview-contact,
+._top-bar ._preview-user{
+    display: flex;
+    align-items: center;
+    gap:5px;
+
+    height: 100%;
+    
+}
+
+/* Icon */
+._top-bar ._icon-wrapper{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+._icon-wrapper ._top-icon{
+    font-size: 1.3em;
+    color: rgb(177, 177, 177);
+
+    width: 25px;
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: all .3s;
+}
+
+._icon-wrapper ._top-icon:hover{
+    color: rgb(0, 150, 136);
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+._icon-wrapper ._top-icon:active{
+    color: rgb(0, 108, 97);
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0);
+}
+/* /Icon */
+
+/* Preview */
+._preview-photo{
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+._preview-photo img{
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+
+._text-container{ 
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+
+    font-size: .9em;
+}
+
+._info-date{
+    font-size: .8em;
+}
+
+/* Silence Bar */
+._silence-bar{
+    width:100%; height: 70px;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    padding: .5em;
+    background: rgb(142, 218, 252);
+}
+
+._silence-bar ._preview-photo{
+    background: white;
+}
+
+._silence-bar i{
+    font-size: 1.5em;
+    color: rgb(142, 218, 252);
+    transform: translateX(24%) translateY(40%);
+}
+
+._silence-bar span{
+    font-size: .9em;
+}
+
+._silence-bar a{
+    font-size: .8em;
+    color: grey;
+}
+
+._silence-bar a:hover{
+    color: rgb(38, 38, 39) ;
+}
+
+/* search Bar */
+._searchbar{
+    width:100%; height: 40px;
+
+    padding: .3em;
+    background: rgb(234, 234, 234)
+}
+
+._btn-search{
+    border: 1px solid rgb(229, 229, 229);
+    padding: 0 15px;
+    background: white;
+    color: rgb(210, 210, 210);
+    transition: all.2s;
+}
+
+._btn-search:hover{
+    background: rgb(216, 216, 216);
+    color: white;
+}
+
+._btn-search:active{
+    background: rgb(180, 180, 180);
+    color: rgb(229, 229, 229);
+}
+
+._search-input{
+    border: 1px solid rgb(206, 206, 206);
+    border-bottom: transparent
+}
+
+._search-input::placeholder{
+    font-size: .7em;
+    font-weight: 600;
+    padding: 10px;
+}
+
+._search-input:focus-visible{
+    outline: 0;
+}
+
+/* Chatlist */
+._chat-list{
+    width: 100%; height: calc(100% - (40px - 60px - 70px));
+    background: white;
+    
+    overflow-y: scroll;
+}
+
+._chat-list ._card{
+    width: 100%; height: 60px;
+    padding: 0 1.2em;
+
+    position: relative;
+
+    border-bottom: 1px solid rgb(212, 212, 212);
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+._date-message{
+    position: absolute;
+    right: .6em; top: 1em;
+
+    font-size: .7em;
 }

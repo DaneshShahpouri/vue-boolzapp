@@ -11,7 +11,14 @@
     <!-- boodstrapp -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+    
     <title>BoolzApp</title>
 </head>
 <body>
@@ -19,7 +26,123 @@
 
     <div id="app">
 
-        <div class="_all-container dflex justify-content-center align-items-center"></div>
+        <div class="_all-container">
+            
+            
+            <!-- Application -->
+            <div class="_app-container center d-flex">
+                
+                <!-- Left-side -->
+                <div class="_left-side">
+
+                    <!-- Top-bar -->
+                    <div class="_top-bar">
+
+                        <!-- Info Utente -->
+                        <div class="_preview-user">
+
+                            <div class="_preview-photo">
+                                <img src="img/avatar_1.jpg" alt="">
+                            </div>
+
+
+                            <div class="_text-container">
+                                <span class="_user-name">Nome Cognome</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="_icon-wrapper">
+                            <!-- stato -->
+                            <i class="fa-solid fa-circle-notch _top-icon"></i>
+
+                            <!-- New Message -->
+                            <i class="fa-solid fa-message _top-icon"></i>
+
+                            <!-- option -->
+                            <i class="fa-solid fa-ellipsis-vertical _top-icon"></i>
+                        </div>
+
+                    </div>
+
+                    <!-- silenzia -->
+                    <div class="_silence-bar">
+
+                        <div class="_preview-photo">
+                            <i class="fa-solid fa-bell-slash"></i>
+                        </div>
+
+                        <div class="_text-container">
+                            <span class="">Ricevi notifiche di nuovi messaggi</span>
+                            <a href="#">Attiva notifiche desktop</a>
+                        </div>
+
+                    </div>
+
+                    <!-- search -->
+                    <div class="_searchbar">
+                        <form class="w-100 d-flex" action="#">
+                            <button class="_btn _btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input class="_search-input w-100" type="text" placeholder="Cerca o inizia una nuova chat">
+                        </form>
+                    </div>
+
+                    <!-- chat List -->
+                    <div class="_chat-list">
+
+                        <div class="_card">
+                            <div class="_preview-photo">
+                                <img src="img/avatar_2.jpg" alt="">
+                            </div>
+
+                            <div class="_text-container">
+                                <span class="_user-name">Nome Cognome</span>
+                                <span class="_info-date">Ultimo accesso:</span>
+                            </div>
+
+                            <span class="_date-message">12:30</span>
+                        </div>
+
+                    </div>
+
+                </div>
+                
+                <!-- Rigth-side -->
+                <div class="_rigth-side">
+                    <div class="_top-bar">
+
+                        <div class="_preview-contact">
+                            <div class="_preview-photo">
+                                <img src="img/avatar_1.jpg" alt="">
+                            </div>
+
+
+                            <div class="_text-container">
+                                <span class="_user-name">Nome Cognome</span>
+                                <span class="_info-date">Ultimo accesso:</span>
+                            </div>
+                        </div>
+
+                        <div class="_icon-wrapper">
+                            <!-- search-icon -->
+                            <i class="fa-solid fa-magnifying-glass _top-icon"></i>
+
+                            <!-- paperclip icon-->
+                            <i class="fa-solid fa-paperclip _top-icon"></i>
+
+                            <!-- option -->
+                            <i class="fa-solid fa-ellipsis-vertical _top-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Background -->
+            <div class="_background-bar"></div>
+            <!-- /Background -->
+        </div>
 
     </div>
 
