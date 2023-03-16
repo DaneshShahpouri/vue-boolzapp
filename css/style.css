@@ -248,3 +248,65 @@
 
     font-size: .7em;
 }
+
+
+/* Rigth-Side */
+
+/* Chat screen */
+._chat-screen{
+    width: 100%;
+    height: calc(100% - (60px + 50px));
+    background-image: url(../img/mine.jpg);
+
+    padding: 1em;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.user-mess{
+    position: relative;
+    padding: .5em;
+    padding-left: 3em;
+
+    background: rgb(213, 249, 186);
+    border-radius: 10px;
+
+    align-self: self-end;
+}
+
+.server-mess{
+    position: relative;
+    padding: .5em;
+    padding-right: 3em;
+
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+
+    align-self: self-start;
+}
+
+.user-mess>._time-mess{
+    left: .8em;
+}
+
+.server-mess>._time-mess{
+    right: .8em;
+}
+
+._time-mess{
+    position: absolute;
+    bottom: .5em;
+    font-size:.5em ;
+    font-weight: 600;
+
+    color: rgb(65, 65, 65);
+}
+
+/* Bottom-bar */
+._bottom-bar{
+    width: 100%; height: 50px;
+    background: rgb(243, 238, 234);
+}
+
