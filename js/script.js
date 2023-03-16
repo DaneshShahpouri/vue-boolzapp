@@ -173,10 +173,18 @@ const { createApp } = Vue
         newMessageText: '',
         
         newMessage:{
-            date: '10/01/2020 15:30:55',
+            date: '',
             message: '',
-            status: 'send'
+            status: 'received'
         },
+
+        newMessageAnswer:{
+            date: '',
+            message: '',
+            status: 'sent'
+        },
+
+        
       }
     },
 
@@ -188,24 +196,59 @@ const { createApp } = Vue
         addMessage(){
             
             let date = DateTime.now().setZone('Europe/Rome');
-            this.newMessage.date = `${date.day}/${date.month}/${date.year} ${date.hour}:${date.minute}:${date.second}`;
+            
+            //console.log(date.minute.toString().length)
+            
+            this.newMessage.date = `${date.day.toString().length <2 ? '0' + date.day : date.day}/${date.month.toString().length <2 ? '0' + date.month : date.month}/${date.year} ${date.hour.toString().length <2 ? '0' + date.hour : date.hour}:${date.minute.toString().length <2 ? '0' + date.minute : date.minute}:${date.second.toString().length <2 ? '0' + date.second : date.second}`;
             this.newMessage.message = this.newMessageText;
-            console.log(this.newMessage);
-            console.log(this.contacts[this.globalIndex]);
+            //console.log(this.newMessage);
+            //console.log(this.contacts[this.globalIndex]);
 
             if(this.newMessageText != ''){
                 this.contacts[this.globalIndex].messages.push(this.newMessage)
             }
             
             this.newMessageText = ''
-            this.newMessage = {}
+            this.newMessage={}
+            this.newMessageAnswer = {
+                date: `${date.day.toString().length <2 ? '0' + date.day : date.day}/${date.month.toString().length <2 ? '0' + date.month : date.month}/${date.year} ${date.hour.toString().length <2 ? '0' + date.hour : date.hour}:${date.minute.toString().length <2 ? '0' + date.minute : date.minute}:${date.second.toString().length <2 ? '0' + date.second : date.second}`,
+                message: 'ok',
+                status: 'sent'
+            }
             // console.log(date.day);
             // console.log(date.month);
             // console.log(date.year);
             // console.log(date.hour);
             // console.log(date.minute);
+
+
+            let answer= setTimeout(() => {
+                this.contacts[this.globalIndex].messages.push(this.newMessageAnswer)
+            }, 1000);
+
+            answer;
             
+            //this.newMessage={}
 ;
         },
+
+        getHour(elementIndex){
+            let receivedMessArr = [];
+            
+            for (let i=0; i<this.contacts[elementIndex].messages.length; i++){
+
+                if(this.contacts[elementIndex].messages[i].status == 'sent'){
+                    receivedMessArr.push(this.contacts[elementIndex].messages[i].date)
+                }
+            }
+
+            
+            let hour = receivedMessArr[receivedMessArr.length-1];
+            modhour = hour.substr(10, 6);
+            
+            //console.log(modhour)
+            return modhour
+        }
+
     }
   }).mount('#app')
