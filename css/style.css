@@ -308,5 +308,39 @@
 ._bottom-bar{
     width: 100%; height: 50px;
     background: rgb(243, 238, 234);
+
+    display: flex;
+    justify-content: space-around;
+
+    align-items: center;
 }
 
+._input-wrapper{
+    width: 80%;
+}
+
+._input-mess{
+    width: 100%;
+}
+
+._input-mess:focus-visible{
+    outline: 0;
+}
+
+._emoji-wrapper,
+._vocal-wrapper{
+    width: 40px;
+    text-align: center;
+}
+
+._emoji-wrapper> i,
+._vocal-wrapper> i{
+    font-size: 1.2em;
+    color: rgb(114, 114, 114);
+    cursor: pointer;
+}
+
+._emoji-wrapper> i:hover,
+._vocal-wrapper> i:hover{
+    color: black;
+}
