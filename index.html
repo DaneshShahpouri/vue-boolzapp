@@ -141,7 +141,18 @@
                     <!-- Mainscreen -->
                     <div class="_chat-screen">
 
-                        <div v-for="(element, index) in contacts[globalIndex].messages" :class="contacts[globalIndex].messages[index].status == 'sent' ? 'server-mess' : 'user-mess'">
+                        <div v-for="(element, index) in contacts[globalIndex].messages" :class="contacts[globalIndex].messages[index].status == 'sent' ? 'server-mess' : 'user-mess'" @mouseleave="hoverDropDown=false">
+                           
+                           <!-- Dropdown -->
+                            <div class="_dropdown" >
+                                <button class="btn-dropdown" @click="displayDropDown()"><i class="fa-solid fa-caret-down"></i></button>
+                                <div class="dropdown-options" v-if="hoverDropDown">
+                                  <a href="#">Message Info</a>
+                                  <a href="#" @click="deleteMessage(index)">Delete Message</a>
+                                </div>
+                              </div>
+
+
                             {{contacts[globalIndex].messages[index].message}}
                             <span class="_time-mess">{{contacts[globalIndex].messages[index].date.substr(10,6)}}</span>
                         </div>

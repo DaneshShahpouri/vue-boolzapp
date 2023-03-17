@@ -187,6 +187,8 @@ const { createApp } = Vue
         contactsResearch: '',
 
         contactsResearchValue: '',
+
+        hoverDropDown:false,
         
       }
     },
@@ -276,6 +278,18 @@ const { createApp } = Vue
                 
             }
            
+        },
+
+        displayDropDown(){
+            if(this.hoverDropDown==false){
+                this.hoverDropDown=true
+            }else{
+                this.hoverDropDown=false
+            }
+        },
+
+        deleteMessage(index){
+            this.contacts[this.globalIndex].messages.splice(index,1)
         }
 
     },
