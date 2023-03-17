@@ -83,25 +83,25 @@
                     <!-- search -->
                     <div class="_searchbar">
                         <form class="w-100 d-flex" action="#">
-                            <button class="_btn _btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            <input class="_search-input w-100" type="text" placeholder="Cerca o inizia una nuova chat">
+                            <button class="_btn _btn-search" @click="research()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input class="_search-input w-100" type="text" placeholder="Cerca o inizia una nuova chat" v-model="contactsResearchValue">
                         </form>
                     </div>
 
                     <!-- chat List -->
                     <div class="_chat-list">
 
-                        <div v-for="(element,index) in contacts" class="_card" @click="selectContact(index)">
+                        <div v-for="(element,index) in contactsResearch" class="_card" @click="selectContact(index)">
                             <div class="_preview-photo">
                                 <img :src="contacts[index].avatar">
                             </div>
 
                             <div class="_text-container">
-                                <span class="_user-name">{{contacts[index].name}}</span>
-                                <span class="_info-date">Ultimo accesso {{contacts[index].messages[contacts[index].messages.length-1].date.substr(0,9) + ' alle '+ contacts[index].messages[contacts[index].messages.length-1].date.substr(11,6)}}</span>
+                                <span class="_user-name">{{contactsResearch[index].name}}</span>
+                                <span class="_info-date">{{contactsResearch[index].messages[contactsResearch[index].messages.length-1].message}}</span>
                             </div>
 
-                            <span class="_date-message">{{getHour(index)}}</span>
+                            <span class="_date-message">{{contactsResearch[index].messages[contactsResearch[index].messages.length-1].date.substr(10,6)}}</span>
                         </div>
 
                     </div>
@@ -122,7 +122,7 @@
 
                             <div class="_text-container">
                                 <span class="_user-name">{{contacts[globalIndex].name}}</span>
-                                <span class="_info-date">Ultimo accesso {{contacts[globalIndex].messages[contacts[globalIndex].messages.length-1].date.substr(0,16)}}</span>
+                                <span class="_info-date" @click="getHour(globalIndex)">Ultimo accesso {{getHour(globalIndex)}} </span>
                             </div>
                         </div>
 

@@ -184,6 +184,9 @@ const { createApp } = Vue
             status: 'sent'
         },
 
+        contactsResearch: '',
+
+        contactsResearchValue: '',
         
       }
     },
@@ -244,11 +247,40 @@ const { createApp } = Vue
 
             
             let hour = receivedMessArr[receivedMessArr.length-1];
-            modhour = hour.substr(10, 6);
+            modhour = hour.substr(0, 16);
             
-            //console.log(modhour)
             return modhour
+        },
+
+        research(){
+            if( this.contactsResearchValue == ''){
+                
+                this.contactsResearch = this.contacts;
+
+            }else{
+                let arrPro = []
+                
+                this.contacts.forEach(element => {
+            
+                    let correctName = element.name.toLowerCase()
+                    
+                    if(correctName.includes(this.contactsResearchValue.toLowerCase())){
+    
+                        arrPro.push(element);
+  
+                    }
+    
+                });
+
+                this.contactsResearch = arrPro;
+                
+            }
+           
         }
 
+    },
+
+    mounted(){
+        this.contactsResearch = this.contacts
     }
   }).mount('#app')
