@@ -91,7 +91,7 @@
                     <!-- chat List -->
                     <div class="_chat-list">
 
-                        <div v-for="(element,index) in contactsResearch" class="_card" @click="selectContact(index)">
+                        <div v-for="(element,index) in contactsResearch" class="_card" :class="index==globalIndex ? 'active' : '' " @click="selectContact(index)">
                             <div class="_preview-photo">
                                 <img :src="contacts[index].avatar">
                             </div>

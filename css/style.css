@@ -249,6 +249,12 @@
     background: rgb(222, 222, 222);
 }
 
+._chat-list .active,
+._chat-list .active:hover{
+    background: rgba(0, 150, 135, 0.612);
+    color: white;
+}
+
 ._date-message{
     position: absolute;
     right: .6em; top: 1em;
