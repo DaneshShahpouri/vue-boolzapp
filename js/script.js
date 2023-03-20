@@ -214,6 +214,12 @@ const { createApp } = Vue
         isOnlineCheck: '',
 
         OptionDropDown:false,
+
+        isEditnewContact: false,
+        newContact : {},
+        newContactName: '',
+        newContactPhoto: '',
+        spanMessageNewContact:'Aggiungi nome e foto del tuo nuovo contatto',
         
       }
     },
@@ -295,7 +301,8 @@ const { createApp } = Vue
         },
 
         getHour(elementIndex){
-            if( this.contacts[elementIndex].messages.length > 1 || this.contacts.length>0){
+            console.log(this.contacts[elementIndex].messages.length > 1)
+            if( this.contacts[elementIndex].messages.length > 0 && this.contacts.length > 0){
                     let receivedMessArr = [];
                 
                 for (let i=0; i<this.contacts[elementIndex].messages.length; i++){
@@ -403,6 +410,34 @@ const { createApp } = Vue
 
         delateChat(){
             this.contacts.splice(this.contacts[this.globalIndex], 1)
+        },
+
+        editContact(){
+            if(this.isEditnewContact){
+                this.isEditnewContact = false
+            }else{
+                this.isEditnewContact = true
+            }
+        },
+
+        addContact(){
+            if(this.newContactName != '' && this.newContactPhoto != ''){
+
+                this.newContact = {
+                    name: this.newContactName,
+                    avatar: this.newContactPhoto,
+                    visible: true,
+                    messages: [],
+                };
+    
+                this.contacts.push(this.newContact);
+    
+                this.newContact={};
+                this.isEditnewContact = false;
+            }else{
+                this.spanMessageNewContact='Inserisci un nome e un indirizzo valido'
+            }
+
         }
     },
 

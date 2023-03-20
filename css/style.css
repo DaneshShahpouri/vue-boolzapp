@@ -75,6 +75,56 @@
     background: rgb(234, 234, 234)
 }
 
+.add-contact{
+    position: absolute;
+    top: 50%;left: 50%;
+
+    min-width: 300px; width: 50%;
+    height: 30%;
+    z-index: 2;
+    padding: 1em;
+
+    background-color: rgb(246, 246, 246);
+    box-shadow: 2px 2px 15px #00000057;
+
+    border-radius: 10px;
+
+    display: flex;
+    flex-flow: column;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.add-contact .input-wrapper{
+    display: flex;
+    width: 100%;
+}
+
+.add-contact .input-wrapper input{
+    width: 100%;
+}
+
+.add-contact .btn-add{
+    padding: .3em 1.5em;
+    border: 1px solid transparent;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0);
+    color: rgb(1, 95, 85);
+    background: #e3e3e3;
+    border-radius: 10px;
+}
+
+.add-contact .btn-add:hover{
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.205);
+    color: rgb(0, 150, 136);
+    background: #f5f5f5;
+}
+
+.messAddContact{
+    font-size: .7em;
+}
 
 ._top-bar ._preview-contact,
 ._top-bar ._preview-user{

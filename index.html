@@ -52,13 +52,30 @@
 
                         </div>
 
+                        <!-- Aggiungi Contatto -->
+                        <div v-if="this.isEditnewContact" class="add-contact" @keyup.enter="addContact()">
+                            <div class="input-wrapper">
+
+                                <span>Nome Contatto</span>
+                                <input class="name-contact-input" type="text" v-model="newContactName" placeholder="Nome utente">
+                            </div>
+
+                            <div class="input-wrapper">
+                                <span>Foto Contatto</span>
+                                <input class="photo-contact-input" type="text" v-model="newContactPhoto" placeholder="Inserisci url della foto">
+                            </div>
+
+                            <button class="btn-add" @click="addContact()">Inizia Chat</button>
+                            <span class="messAddContact">{{spanMessageNewContact}}</span>
+                        </div>
 
                         <div class="_icon-wrapper">
                             <!-- stato -->
                             <i class="fa-solid fa-circle-notch _top-icon"></i>
 
                             <!-- New Message -->
-                            <i class="fa-solid fa-message _top-icon"></i>
+                            <i class="fa-solid fa-message _top-icon" @click="editContact()"></i>
+
 
                             <!-- option -->
                             <i class="fa-solid fa-ellipsis-vertical _top-icon"></i>
@@ -98,10 +115,10 @@
 
                             <div class="_text-container" v-if="contacts.length > 0 " >
                                 <span class="_user-name">{{contactsResearch[index].name}}</span>
-                                <span class="_info-date" v-if="this.contacts[index].messages.length > 0">{{contactsResearch[index].messages[contactsResearch[index].messages.length-1].message}}</span>
+                                <span class="_info-date" v-if="contacts[index].messages.length > 0">{{contactsResearch[index].messages[contactsResearch[index].messages.length-1].message}}</span>
                             </div>
 
-                            <span class="_date-message"  v-if="contacts.length > 0 "  v-show="this.contacts[index].messages.length > 0">{{contactsResearch[index].messages[contactsResearch[index].messages.length-1].date.substr(10,6)}}</span>
+                            <span class="_date-message"  v-if="contacts.length > 0 && contacts[index].messages.length > 0">{{contactsResearch[index].messages[contactsResearch[index].messages.length-1].date.substr(10,6)}}</span>
                         </div>
 
                     </div>
@@ -126,8 +143,8 @@
                                 <span class="_info-date" v-if="this.contacts[this.globalIndex].messages.length > 0" v-show="this.isOnline"> {{this.staScrivendoboolean ? 'Sta scrivendo...' : 'Online'}} </span>
 
                                 <div class="offline-status" :class="this.isOnline ? 'online' : '' "></div>
-                                <span class="_info-date" v-if="this.contacts[this.globalIndex].messages.length > 0" v-show="this.isOnline == false">Ultimo accesso {{getHour(globalIndex)}} </span>
-                                <span class="_info-date" v-if="this.contacts[this.globalIndex].messages.length == 0" v-show="this.isOnline == false"> Inizia la chat </span>
+                                <span class="_info-date" v-if="contacts[globalIndex].messages.length > 1" v-show="isOnline == false">Ultimo accesso {{getHour(globalIndex)}} </span>
+                                <span class="_info-date" v-if="contacts[globalIndex].messages.length == 0" v-show="isOnline == false"> Inizia la chat </span>
                             </div>
                         </div>
 
