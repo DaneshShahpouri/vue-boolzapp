@@ -189,6 +189,10 @@ const { createApp } = Vue
         contactsResearchValue: '',
 
         hoverDropDown:false,
+
+        isWrite:false,
+
+        isWriteCheckTime: ""
         
       }
     },
@@ -201,48 +205,46 @@ const { createApp } = Vue
         addMessage(){
             
             let date = DateTime.now().setZone('Europe/Rome');
+            let index = this.globalIndex;
             
-            //console.log(date.minute.toString().length)
             
             this.newMessage.date = `${date.day.toString().length <2 ? '0' + date.day : date.day}/${date.month.toString().length <2 ? '0' + date.month : date.month}/${date.year} ${date.hour.toString().length <2 ? '0' + date.hour : date.hour}:${date.minute.toString().length <2 ? '0' + date.minute : date.minute}:${date.second.toString().length <2 ? '0' + date.second : date.second}`;
             this.newMessage.message = this.newMessageText;
-            //console.log(this.newMessage);
-            //console.log(this.contacts[this.globalIndex]);
+            
+          
+            let newstring= this.newMessageText.replaceAll(" ", "")
+            
+            
+            if(this.newMessageText != '' && newstring != ''){
 
-            if(this.newMessageText != ''){
-                this.contacts[this.globalIndex].messages.push(this.newMessage)
+                this.contacts[index].messages.push(this.newMessage);
+
+                this.newMessageAnswer = {
+                    date: `${date.day.toString().length <2 ? '0' + date.day : date.day}/${date.month.toString().length <2 ? '0' + date.month : date.month}/${date.year} ${date.hour.toString().length <2 ? '0' + date.hour : date.hour}:${date.minute.toString().length <2 ? '0' + date.minute : date.minute}:${date.second.toString().length <2 ? '0' + date.second : date.second}`,
+                    message: 'ok',
+                    status: 'sent'
+                    
+                    // console.log(date.day);
+                    // console.log(date.month);
+                    // console.log(date.year);
+                    // console.log(date.hour);
+                    // console.log(date.minute);
+                    
+                }
+                let answer= setTimeout(() => {
+                    this.contacts[index].messages.push(this.newMessageAnswer)
+                    
+                    this.scrollToElement()
+                }, 1000);
+                
+                answer;
+                
+                this.scrollToElement()
             }
             
+            this.isWrite=false;
             this.newMessageText = ''
             this.newMessage={}
-            this.newMessageAnswer = {
-                date: `${date.day.toString().length <2 ? '0' + date.day : date.day}/${date.month.toString().length <2 ? '0' + date.month : date.month}/${date.year} ${date.hour.toString().length <2 ? '0' + date.hour : date.hour}:${date.minute.toString().length <2 ? '0' + date.minute : date.minute}:${date.second.toString().length <2 ? '0' + date.second : date.second}`,
-                message: 'ok',
-                status: 'sent'
-            }
-            // console.log(date.day);
-            // console.log(date.month);
-            // console.log(date.year);
-            // console.log(date.hour);
-            // console.log(date.minute);
-
-            
-            
-            // console.log(container.scrollTop)
-            let answer= setTimeout(() => {
-                this.contacts[this.globalIndex].messages.push(this.newMessageAnswer)
-                // container.scrollTop = container.scrollHeight;
-                //console.log(container)
-                this.scrollToElement()
-            }, 1000);
-            
-            answer;
-            // let heigth = container.offsetHeight + container.scrollHeight
-            
-            this.scrollToElement()
-            
-            //this.newMessage={}
-;
         },
 
         getHour(elementIndex){
@@ -310,7 +312,25 @@ const { createApp } = Vue
 
                 },100
             )
-          },
+        },
+
+        isWriteCheck(){
+            this.isWriteCheckTime = setInterval(()=>{
+
+                    if(this.newMessageText != ''){
+                        this.isWrite=true;
+                    }else{
+                        this.isWrite=false;
+                    };
+                    
+                },500)
+        },
+
+        stopCheck(){
+            clearInterval(this.isWriteCheckTime)
+        }
+
+        
 
     },
 
