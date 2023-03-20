@@ -115,7 +115,7 @@
 
                             <div class="_text-container" v-if="contacts.length > 0 " >
                                 <span class="_user-name">{{contactsResearch[index].name}}</span>
-                                <span class="_info-date" v-if="contacts[index].messages.length > 0">{{contactsResearch[index].messages[contactsResearch[index].messages.length-1].message}}</span>
+                                <span class="_info-date" v-if="contacts[index].messages.length > 0">{{LastMessageFun(index)}}</span>
                             </div>
 
                             <span class="_date-message"  v-if="contacts.length > 0 && contacts[index].messages.length > 0">{{contactsResearch[index].messages[contactsResearch[index].messages.length-1].date.substr(10,6)}}</span>

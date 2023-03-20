@@ -198,6 +198,8 @@ const { createApp } = Vue
             status: 'sent'
         },
 
+        LastMessage: '',
+
         contactsResearch: '',
 
         contactsResearchValue: '',
@@ -438,10 +440,21 @@ const { createApp } = Vue
                 this.spanMessageNewContact='Inserisci un nome e un indirizzo valido'
             }
 
+        },
+
+        LastMessageFun(indexEl){
+            let mess = this.contacts[indexEl].messages[this.contacts[indexEl].messages.length-1].message
+            if(mess.length>36){
+
+                this.LastMessage = mess.substr(0,35) + '..';
+            }
+
+            return this.LastMessage
         }
     },
 
     mounted(){
-        this.contactsResearch = this.contacts
+        this.contactsResearch = this.contacts;
+        
     }
   }).mount('#app')
