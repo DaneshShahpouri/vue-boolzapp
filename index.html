@@ -141,7 +141,7 @@
                     <!-- Mainscreen -->
                     <div class="_chat-screen">
 
-                        <div v-for="(element, index) in contacts[globalIndex].messages" :class="contacts[globalIndex].messages[index].status == 'sent' ? 'server-mess' : 'user-mess'" @mouseleave="hoverDropDown=false">
+                        <div v-for="(element, index) in contacts[globalIndex].messages" :class="contacts[globalIndex].messages[index].status == 'sent' ? 'server-mess' : 'user-mess'" @mouseleave="hoverDropDown=false" refs="scrollToMe">
                            
                            <!-- Dropdown -->
                             <div class="_dropdown" >

@@ -226,12 +226,20 @@ const { createApp } = Vue
             // console.log(date.hour);
             // console.log(date.minute);
 
-
+            
+            
+            // console.log(container.scrollTop)
             let answer= setTimeout(() => {
                 this.contacts[this.globalIndex].messages.push(this.newMessageAnswer)
+                // container.scrollTop = container.scrollHeight;
+                //console.log(container)
+                this.scrollToElement()
             }, 1000);
-
+            
             answer;
+            // let heigth = container.offsetHeight + container.scrollHeight
+            
+            this.scrollToElement()
             
             //this.newMessage={}
 ;
@@ -290,7 +298,19 @@ const { createApp } = Vue
 
         deleteMessage(index){
             this.contacts[this.globalIndex].messages.splice(index,1)
-        }
+        },
+
+        scrollToElement() {
+            setTimeout(
+                ()=>{
+                    let container = this.$el.querySelector("._chat-screen");
+
+                    container.scrollTo({top: container.scrollHeight, behavior: 'smooth'})
+                    //container.scrollTop = container.scrollHeight;
+
+                },100
+            )
+          },
 
     },
 
