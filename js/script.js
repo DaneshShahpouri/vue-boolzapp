@@ -170,6 +170,20 @@ const { createApp } = Vue
 
         globalIndex: 0,
 
+        risposte:[
+            "Ciao, quanto tempo",
+            "Non so se hai capito che non posso dare risposte complesse.",
+            "Stasera? non posso, devo vedermi con ChatGPT",
+            "Alexa, abbassa le luci!",
+            "un tempo anche io ero un avventuriero, finche non mi sono beccato una freccia nel ginocchio",
+            "scusa ma a te sembra normale che i tuoi contatti sono tutti disegni?",
+            "Lo so che mi preferivi quando dicevo solo ok.",
+            "Posso dare molte risposte diverse ma non lo farò.",
+            "Scusa come hai avuto il mio numero?",
+            
+        ],
+
+
         newMessageText: '',
         
         newMessage:{
@@ -192,7 +206,12 @@ const { createApp } = Vue
 
         isWrite:false,
 
-        isWriteCheckTime: ""
+        isWriteCheckTime: "",
+
+        staScrivendoboolean:false,
+
+        isOnline : false,
+        isOnlineCheck: '',
         
       }
     },
@@ -214,14 +233,22 @@ const { createApp } = Vue
           
             let newstring= this.newMessageText.replaceAll(" ", "")
             
+            if(this.isOnline==true){
+                clearTimeout(this.isOnlineCheck)
+            }
+
+           
             
             if(this.newMessageText != '' && newstring != ''){
 
                 this.contacts[index].messages.push(this.newMessage);
+                
+                let templateAnswer = `Ciao sono ${this.contacts[this.globalIndex].name}, ma questo lo sai già.`
+                this.risposte.push(templateAnswer)
 
                 this.newMessageAnswer = {
                     date: `${date.day.toString().length <2 ? '0' + date.day : date.day}/${date.month.toString().length <2 ? '0' + date.month : date.month}/${date.year} ${date.hour.toString().length <2 ? '0' + date.hour : date.hour}:${date.minute.toString().length <2 ? '0' + date.minute : date.minute}:${date.second.toString().length <2 ? '0' + date.second : date.second}`,
-                    message: 'ok',
+                    message: this.risposte[this.randomNumber(0, this.risposte.length - 1)],
                     status: 'sent'
                     
                     // console.log(date.day);
@@ -230,21 +257,39 @@ const { createApp } = Vue
                     // console.log(date.hour);
                     // console.log(date.minute);
                     
-                }
+                };
+
+                this.staScrivendoboolean=true;
+                this.isOnline = true;
+
+                this.isOnlineCheck = setTimeout(()=>{
+                    this.isOnline=false;
+                    
+                },4000)
+
+              
+                
                 let answer= setTimeout(() => {
                     this.contacts[index].messages.push(this.newMessageAnswer)
                     
                     this.scrollToElement()
+                    this.staScrivendoboolean=false;
+                    
                 }, 1000);
+                
                 
                 answer;
                 
-                this.scrollToElement()
+                this.scrollToElement();
             }
             
             this.isWrite=false;
             this.newMessageText = ''
             this.newMessage={}
+
+            
+            let deleteAnswer = this.risposte.pop();
+            
         },
 
         getHour(elementIndex){
@@ -328,9 +373,12 @@ const { createApp } = Vue
 
         stopCheck(){
             clearInterval(this.isWriteCheckTime)
-        }
+        },
 
-        
+        randomNumber(min, max){
+            let random = Math.floor(Math.random() * (max - min + 1) + min);
+            return random
+        },
 
     },
 

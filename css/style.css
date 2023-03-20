@@ -75,7 +75,6 @@
     background: rgb(234, 234, 234)
 }
 
-
 ._top-bar ._preview-contact,
 ._top-bar ._preview-user{
     display: flex;
@@ -131,6 +130,8 @@
 }
 
 ._text-container{ 
+    position: relative;
+
     height: 100%;
 
     display: flex;
@@ -139,6 +140,26 @@
     justify-content: center;
 
     font-size: .9em;
+}
+
+._text-container ._user-name{
+    padding-left:1em
+}
+
+.offline-status.online{  
+    background: rgb(0, 204, 0);
+    border: 1px solid transparent;
+}
+
+.offline-status{
+    width: 10px; height: 10px;
+    position: absolute;
+    top: 8px; left: 0;
+    background: rgb(206, 206, 206);
+    border: 1px solid grey;
+    border-radius: 50%;
+
+    transition: all .4s;
 }
 
 ._info-date{
@@ -428,3 +449,4 @@
 ._vocal-wrapper> i:hover{
     color: black;
 }
+

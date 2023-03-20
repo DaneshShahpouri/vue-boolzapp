@@ -122,7 +122,10 @@
 
                             <div class="_text-container">
                                 <span class="_user-name">{{contacts[globalIndex].name}}</span>
-                                <span class="_info-date" @click="getHour(globalIndex)">Ultimo accesso {{getHour(globalIndex)}} </span>
+                                <span class="_info-date" @click="getHour(globalIndex)" v-if="this.isOnline"> {{this.staScrivendoboolean ? 'Sta scrivendo...' : 'Online'}} </span>
+
+                                <div class="offline-status" :class="this.isOnline ? 'online' : '' "></div>
+                                <span class="_info-date" @click="getHour(globalIndex)" v-if="this.isOnline == false">Ultimo accesso {{getHour(globalIndex)}} </span>
                             </div>
                         </div>
 
