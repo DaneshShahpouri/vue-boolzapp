@@ -91,17 +91,17 @@
                     <!-- chat List -->
                     <div class="_chat-list">
 
-                        <div v-for="(element,index) in contactsResearch" class="_card" :class="index==globalIndex ? 'active' : '' " @click="selectContact(index)">
+                        <div v-if="contacts.length > 0 "  v-for="(element,index) in contactsResearch" class="_card" :class="index==globalIndex ? 'active' : '' " @click="selectContact(index)">
                             <div class="_preview-photo">
                                 <img :src="contacts[index].avatar">
                             </div>
 
-                            <div class="_text-container">
+                            <div class="_text-container" v-if="contacts.length > 0 " >
                                 <span class="_user-name">{{contactsResearch[index].name}}</span>
-                                <span class="_info-date">{{contactsResearch[index].messages[contactsResearch[index].messages.length-1].message}}</span>
+                                <span class="_info-date" v-if="this.contacts[index].messages.length > 0">{{contactsResearch[index].messages[contactsResearch[index].messages.length-1].message}}</span>
                             </div>
 
-                            <span class="_date-message">{{contactsResearch[index].messages[contactsResearch[index].messages.length-1].date.substr(10,6)}}</span>
+                            <span class="_date-message"  v-if="contacts.length > 0 "  v-show="this.contacts[index].messages.length > 0">{{contactsResearch[index].messages[contactsResearch[index].messages.length-1].date.substr(10,6)}}</span>
                         </div>
 
                     </div>
@@ -116,16 +116,18 @@
 
                         <div class="_preview-contact">
                             <div class="_preview-photo">
-                                <img :src="contacts[globalIndex].avatar" :alt="contacts[globalIndex].name">
+                                <img v-if="contacts.length > 0 " :src="contacts.length > 0 ? contacts[globalIndex].avatar : ''" :alt="contacts.length > 0 ? contacts[globalIndex].name : ''">
                             </div>
 
 
-                            <div class="_text-container">
-                                <span class="_user-name">{{contacts[globalIndex].name}}</span>
-                                <span class="_info-date" @click="getHour(globalIndex)" v-if="this.isOnline"> {{this.staScrivendoboolean ? 'Sta scrivendo...' : 'Online'}} </span>
+                            <div class="_text-container" v-if="contacts.length > 0 " >
+                                <span class="_user-name" v-if="contacts.length > 0">{{ this.contacts.length > 0 ? contacts[globalIndex].name : ''}}</span>
+
+                                <span class="_info-date" v-if="this.contacts[this.globalIndex].messages.length > 0" v-show="this.isOnline"> {{this.staScrivendoboolean ? 'Sta scrivendo...' : 'Online'}} </span>
 
                                 <div class="offline-status" :class="this.isOnline ? 'online' : '' "></div>
-                                <span class="_info-date" @click="getHour(globalIndex)" v-if="this.isOnline == false">Ultimo accesso {{getHour(globalIndex)}} </span>
+                                <span class="_info-date" v-if="this.contacts[this.globalIndex].messages.length > 0" v-show="this.isOnline == false">Ultimo accesso {{getHour(globalIndex)}} </span>
+                                <span class="_info-date" v-if="this.contacts[this.globalIndex].messages.length == 0" v-show="this.isOnline == false"> Inizia la chat </span>
                             </div>
                         </div>
 
@@ -137,27 +139,37 @@
                             <i class="fa-solid fa-paperclip _top-icon"></i>
 
                             <!-- option -->
-                            <i class="fa-solid fa-ellipsis-vertical _top-icon"></i>
+                            <i class="fa-solid fa-ellipsis-vertical _top-icon" @click="optionMenuToggle()"></i>
+
+                            <!-- Dropdown -->
+                            <div class="_dropdown-topside" >
+                                <div class="dropdown-options-top" v-if="OptionDropDown">
+                                  <a href="#" @click="deleteAllMessages()">Delete all messages</a>
+                                  <a href="#" @click="delateChat()">Delete Chat</a>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
                     <!-- Mainscreen -->
                     <div class="_chat-screen">
 
-                        <div v-for="(element, index) in contacts[globalIndex].messages" :class="contacts[globalIndex].messages[index].status == 'sent' ? 'server-mess' : 'user-mess'" @mouseleave="hoverDropDown=false" refs="scrollToMe">
+                        <div v-if="contacts.length > 0 "  v-for="(element, index) in contacts[globalIndex].messages" :class="contacts[globalIndex].messages[index].status == 'sent' ? 'server-mess' : 'user-mess'" @mouseleave="hoverDropDown=false" refs="scrollToMe" >
                            
                            <!-- Dropdown -->
-                            <div class="_dropdown" >
+                            <div class="_dropdown" v-if="this.contacts.length > 0 ">
                                 <button class="btn-dropdown" @click="displayDropDown()"><i class="fa-solid fa-caret-down"></i></button>
                                 <div class="dropdown-options" v-if="hoverDropDown">
                                   <a href="#">Message Info</a>
                                   <a href="#" @click="deleteMessage(index)">Delete Message</a>
                                 </div>
-                              </div>
+                            </div>
 
 
                             {{contacts[globalIndex].messages[index].message}}
-                            <span class="_time-mess">{{contacts[globalIndex].messages[index].date.substr(10,6)}}</span>
+
+                            <span  v-if="contacts.length > 0 " class="_time-mess">{{contacts[globalIndex].messages[index].date.substr(10,6)}}</span>
                         </div>
 
                     </div>

@@ -212,6 +212,8 @@ const { createApp } = Vue
 
         isOnline : false,
         isOnlineCheck: '',
+
+        OptionDropDown:false,
         
       }
     },
@@ -233,7 +235,7 @@ const { createApp } = Vue
           
             let newstring= this.newMessageText.replaceAll(" ", "")
             
-            if(this.isOnline==true){
+            if(this.isOnline == true){
                 clearTimeout(this.isOnlineCheck)
             }
 
@@ -259,7 +261,7 @@ const { createApp } = Vue
                     
                 };
 
-                this.staScrivendoboolean=true;
+                this.staScrivendoboolean = true;
                 this.isOnline = true;
 
                 this.isOnlineCheck = setTimeout(()=>{
@@ -293,18 +295,23 @@ const { createApp } = Vue
         },
 
         getHour(elementIndex){
-            let receivedMessArr = [];
-            
-            for (let i=0; i<this.contacts[elementIndex].messages.length; i++){
+            if( this.contacts[elementIndex].messages.length > 1 || this.contacts.length>0){
+                    let receivedMessArr = [];
+                
+                for (let i=0; i<this.contacts[elementIndex].messages.length; i++){
 
-                if(this.contacts[elementIndex].messages[i].status == 'sent'){
-                    receivedMessArr.push(this.contacts[elementIndex].messages[i].date)
+                    if(this.contacts[elementIndex].messages[i].status == 'sent'){
+                        receivedMessArr.push(this.contacts[elementIndex].messages[i].date)
+                    }
                 }
-            }
 
+                
+                let hour = receivedMessArr[receivedMessArr.length-1];
+                modhour = hour.substr(0, 16);
             
-            let hour = receivedMessArr[receivedMessArr.length-1];
-            modhour = hour.substr(0, 16);
+            }else{
+                modhour = 'poco fa'
+            }
             
             return modhour
         },
@@ -380,6 +387,23 @@ const { createApp } = Vue
             return random
         },
 
+        optionMenuToggle(){
+            if(this.OptionDropDown){
+                this.OptionDropDown = false
+            }else{
+                this.OptionDropDown = true
+            }
+        },
+
+        deleteAllMessages(){
+           
+            this.contacts[this.globalIndex].messages.splice(0, this.contacts[this.globalIndex].messages.length); 
+            
+        },
+
+        delateChat(){
+            this.contacts.splice(this.contacts[this.globalIndex], 1)
+        }
     },
 
     mounted(){
