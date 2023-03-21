@@ -304,7 +304,7 @@ const { createApp } = Vue
         },
 
         getHour(elementIndex){
-            console.log(this.contacts[elementIndex].messages.length > 1)
+            //console.log(this.contacts[elementIndex].messages.length > 1)
             if( this.contacts[elementIndex].messages.length > 0 && this.contacts.length > 0){
                     let receivedMessArr = [];
                 
