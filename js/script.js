@@ -198,8 +198,6 @@ const { createApp } = Vue
             status: 'sent'
         },
 
-        LastMessage: '',
-
         contactsResearch: '',
 
         contactsResearchValue: '',
@@ -222,6 +220,9 @@ const { createApp } = Vue
         newContactName: '',
         newContactPhoto: '',
         spanMessageNewContact:'Aggiungi nome e foto del tuo nuovo contatto',
+
+        input: '',
+        search: '',
         
       }
     },
@@ -444,13 +445,15 @@ const { createApp } = Vue
 
         LastMessageFun(indexEl){
             let mess = this.contacts[indexEl].messages[this.contacts[indexEl].messages.length-1].message
-            if(mess.length>36){
+            if(mess.length>47){
 
-                this.LastMessage = mess.substr(0,35) + '..';
+                mess = mess.substr(0,46) + '..';
             }
 
-            return this.LastMessage
-        }
+            return mess
+        },
+
+        
     },
 
     mounted(){
