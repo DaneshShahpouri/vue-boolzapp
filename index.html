@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- boodstrapp -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,20 +22,21 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
-    
+
     <title>BoolzApp</title>
 </head>
+
 <body>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
     <div id="app">
 
         <div class="_all-container">
-            
-            
+
+
             <!-- Application -->
             <div class="_app-container center d-flex">
-                
+
                 <!-- Left-side -->
                 <div class="_left-side">
 
@@ -53,16 +58,18 @@
                         </div>
 
                         <!-- Aggiungi Contatto -->
-                        <div v-if="this.isEditnewContact" class="add-contact" @keyup.enter="addContact()">
+                        <div v-if="isEditnewContact" class="add-contact" @keyup.enter="addContact()">
                             <div class="input-wrapper">
 
                                 <span>Nome Contatto</span>
-                                <input class="name-contact-input" type="text" v-model="newContactName" placeholder="Nome utente">
+                                <input class="name-contact-input" type="text" v-model="newContactName"
+                                    placeholder="Nome utente">
                             </div>
 
                             <div class="input-wrapper">
                                 <span>Foto Contatto</span>
-                                <input class="photo-contact-input" type="text" v-model="newContactPhoto" placeholder="Inserisci url della foto">
+                                <input class="photo-contact-input" type="text" v-model="newContactPhoto"
+                                    placeholder="Inserisci url della foto">
                             </div>
 
                             <button class="btn-add" @click="addContact()">Inizia Chat</button>
@@ -100,31 +107,36 @@
                     <!-- search -->
                     <div class="_searchbar">
                         <form class="w-100 d-flex" action="#">
-                            <button class="_btn _btn-search" @click="research()"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            <input class="_search-input w-100" type="text" placeholder="Cerca o inizia una nuova chat" v-model="contactsResearchValue">
+                            <button class="_btn _btn-search" @click="research()"><i
+                                    class="fa-solid fa-magnifying-glass"></i></button>
+                            <input class="_search-input w-100" type="text" placeholder="Cerca o inizia una nuova chat"
+                                v-model="contactsResearchValue">
                         </form>
                     </div>
 
                     <!-- chat List -->
                     <div class="_chat-list">
 
-                        <div v-if="contacts.length > 0 "  v-for="(element,index) in contactsResearch" class="_card" :class="index==globalIndex ? 'active' : '' " @click="selectContact(index)">
+                        <div v-if="contacts.length > 0 " v-for="(element,index) in contactsResearch" class="_card"
+                            :class="index==globalIndex ? 'active' : '' " @click="selectContact(index)">
                             <div class="_preview-photo">
-                                <img :src="contacts[index].avatar">
+                                <img :src="contactsResearch[index].avatar">
                             </div>
 
-                            <div class="_text-container" v-if="contacts.length > 0 " >
+                            <div class="_text-container" v-if="contactsResearch.length > 0 ">
                                 <span class="_user-name">{{contactsResearch[index].name}}</span>
-                                <span class="_info-date" v-if="contacts[index].messages.length > 0">{{LastMessageFun(index)}}</span>
+                                <span class="_info-date"
+                                    v-if="contactsResearch[index].messages.length > 0">{{LastMessageFun(index)}}</span>
                             </div>
 
-                            <span class="_date-message"  v-if="contacts.length > 0 && contacts[index].messages.length > 0">{{contactsResearch[index].messages[contactsResearch[index].messages.length-1].date.substr(10,6)}}</span>
+                            <span class="_date-message"
+                                v-if="contacts.length > 0 && contactsResearch[index].messages.length > 0">{{contactsResearch[index].messages[contactsResearch[index].messages.length-1].date.substr(10,6)}}</span>
                         </div>
 
                     </div>
 
                 </div>
-                
+
                 <!-- Rigth-side -->
                 <div class="_rigth-side">
 
@@ -133,18 +145,26 @@
 
                         <div class="_preview-contact">
                             <div class="_preview-photo">
-                                <img v-if="contacts.length > 0 " :src="contacts.length > 0 ? contacts[globalIndex].avatar : ''" :alt="contacts.length > 0 ? contacts[globalIndex].name : ''">
+                                <img v-if="contactsResearch.length > 0 "
+                                    :src="contactsResearch.length > 0 ? contactsResearch[globalIndex].avatar : ''"
+                                    :alt="contactsResearch.length > 0 ? contactsResearch[globalIndex].name : ''">
                             </div>
 
 
-                            <div class="_text-container" v-if="contacts.length > 0 " >
-                                <span class="_user-name" v-if="contacts.length > 0">{{ this.contacts.length > 0 ? contacts[globalIndex].name : ''}}</span>
+                            <div class="_text-container" v-if="contactsResearch.length > 0 ">
+                                <span class="_user-name" v-if="contactsResearch.length > 0">{{ contactsResearch.length >
+                                    0 ?
+                                    contactsResearch[globalIndex].name : ''}}</span>
 
-                                <span class="_info-date" v-if="this.contacts[this.globalIndex].messages.length > 0" v-show="this.isOnline"> {{this.staScrivendoboolean ? 'Sta scrivendo...' : 'Online'}} </span>
+                                <span class="_info-date" v-if="contactsResearch[globalIndex].messages.length > 0"
+                                    v-show="isOnline"> {{staScrivendoboolean ? 'Sta scrivendo...' : 'Online'}}
+                                </span>
 
-                                <div class="offline-status" :class="this.isOnline ? 'online' : '' "></div>
-                                <span class="_info-date" v-if="contacts[globalIndex].messages.length > 1" v-show="isOnline == false">Ultimo accesso {{getHour(globalIndex)}} </span>
-                                <span class="_info-date" v-if="contacts[globalIndex].messages.length == 0" v-show="isOnline == false"> Inizia la chat </span>
+                                <div class="offline-status" :class="isOnline ? 'online' : '' "></div>
+                                <span class="_info-date" v-if="contactsResearch[globalIndex].messages.length > 1"
+                                    v-show="isOnline == false">Ultimo accesso {{getHour(globalIndex)}} </span>
+                                <span class="_info-date" v-if="contactsResearch[globalIndex].messages.length == 0"
+                                    v-show="isOnline == false"> Inizia la chat </span>
                             </div>
                         </div>
 
@@ -159,10 +179,10 @@
                             <i class="fa-solid fa-ellipsis-vertical _top-icon" @click="optionMenuToggle()"></i>
 
                             <!-- Dropdown -->
-                            <div class="_dropdown-topside" >
+                            <div class="_dropdown-topside">
                                 <div class="dropdown-options-top" v-if="OptionDropDown">
-                                  <a href="#" @click="deleteAllMessages()">Delete all messages</a>
-                                  <a href="#" @click="delateChat()">Delete Chat</a>
+                                    <a href="#" @click="deleteAllMessages()">Delete all messages</a>
+                                    <a href="#" @click="delateChat()">Delete Chat</a>
                                 </div>
                             </div>
 
@@ -172,21 +192,25 @@
                     <!-- Mainscreen -->
                     <div class="_chat-screen">
 
-                        <div v-if="contacts.length > 0 "  v-for="(element, index) in contacts[globalIndex].messages" :class="contacts[globalIndex].messages[index].status == 'sent' ? 'server-mess' : 'user-mess'" @mouseleave="hoverDropDown=false" refs="scrollToMe" >
-                           
-                           <!-- Dropdown -->
-                            <div class="_dropdown" v-if="this.contacts.length > 0 ">
-                                <button class="btn-dropdown" @click="displayDropDown()"><i class="fa-solid fa-caret-down"></i></button>
+                        <div v-if="contacts.length > 0 " v-for="(element, index) in contacts[globalIndex].messages"
+                            :class="contacts[globalIndex].messages[index].status == 'sent' ? 'server-mess' : 'user-mess'"
+                            @mouseleave="hoverDropDown=false" refs="scrollToMe">
+
+                            <!-- Dropdown -->
+                            <div class="_dropdown" v-if="contacts.length > 0 ">
+                                <button class="btn-dropdown" @click="displayDropDown()"><i
+                                        class="fa-solid fa-caret-down"></i></button>
                                 <div class="dropdown-options" v-if="hoverDropDown">
-                                  <a href="#">Message Info</a>
-                                  <a href="#" @click="deleteMessage(index)">Delete Message</a>
+                                    <a href="#">Message Info</a>
+                                    <a href="#" @click="deleteMessage(index)">Delete Message</a>
                                 </div>
                             </div>
 
 
                             {{contacts[globalIndex].messages[index].message}}
 
-                            <span  v-if="contacts.length > 0 " class="_time-mess">{{contacts[globalIndex].messages[index].date.substr(10,6)}}</span>
+                            <span v-if="contacts.length > 0 "
+                                class="_time-mess">{{contacts[globalIndex].messages[index].date.substr(10,6)}}</span>
                         </div>
 
                     </div>
@@ -199,7 +223,9 @@
                         </div>
 
                         <div class="_input-wrapper">
-                            <input type="text" class="_input-mess" placeholder="Scrivi un messaggio" v-model="newMessageText" @keyup.enter="addMessage()" @focus="isWriteCheck()" @blur="stopCheck()">
+                            <input type="text" class="_input-mess" placeholder="Scrivi un messaggio"
+                                v-model="newMessageText" @keyup.enter="addMessage()" @focus="isWriteCheck()"
+                                @blur="stopCheck()">
                         </div>
 
                         <div class="_vocal-wrapper">
@@ -207,13 +233,13 @@
                             <i class="fa-solid fa-microphone-lines" v-if="isWrite==false"></i>
                         </div>
 
-                        
+
 
                     </div>
                 </div>
-                
+
             </div>
-            
+
             <!-- Background -->
             <div class="_background-bar"></div>
             <!-- /Background -->
@@ -224,4 +250,5 @@
     <script src="https://unpkg.com/vue-emoji-picker/dist/vue-emoji-picker.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 </body>
+
 </html>
